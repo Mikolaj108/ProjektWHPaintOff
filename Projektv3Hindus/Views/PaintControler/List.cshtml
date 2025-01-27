@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WarhammerPaintCenter.Models.Entities.Paint>
+
+<h2>Your Paint Collection</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Owned</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var paint in Model)
+        {
+            <tr>
+                <td>@paint.Name</td>
+                <td>@paint.Type</td>
+                <td>@(paint.Own ? "Yes" : "No")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@paint.Id" class="btn btn-primary">Edit</a>
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="Id" value="@paint.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
